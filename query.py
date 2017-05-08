@@ -49,16 +49,16 @@ init_app()
 q1 = Brand.query.filter_by(brand_id='ram').first()
 
 # Get all models with the name ``Corvette`` and the brand_id ``che``.
-q2 = Model.query.filter_by(name='Corevette', brand_id='che').all()
+q2 = db.session.query(Model).filter(Model.name=='Corvette', Model.brand_id=='che').all()
 
 # Get all models that are older than 1960.
 q3 = Model.query.filter(Model.year<1960).all()
 
 # Get all brands that were founded after 1920.
-q4 = Brand.query.filter_by(founded>1920).all()
+q4 = db.session.query(Brand).filter(Brand.founded>1920).all()
 
 # Get all models with names that begin with ``Cor``.
-q5 = Model.query.filter_by(name=%LIKE%'Cor').all()
+q5 = Model.query.filter(Model.name.like('%Cor%')).all()
 
 # Get all brands that were founded in 1903 and that are not yet discontinued.
 q6 = Brand.query.filter((Brand.founded == 1903) & (Brand.discontinued == None)).all()
